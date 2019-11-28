@@ -1,10 +1,12 @@
 ---
-- hosts: kubernetes-master-nodes
+- hosts: 127.0.0.1
   connection: local
+  gather_facts: no
   tasks:
     - name: Label the lb node with the role used in ds
       shell: |
         kubectl label node k8s-lb role=lb
+      ignore_errors: True
   
     - name: Create ns and service account
       k8s:
