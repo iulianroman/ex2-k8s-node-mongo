@@ -1,0 +1,23 @@
+- name: Add repository for Kubernetes
+  apt_repository: 
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+
+- name: Installing Packages 
+  apt: 
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items: "{{ packages }}"
+
+- name: Add the apt-key 
+  apt_key: 
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Installing K8S Packages 
+  apt: 
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items: "{{ k8spackages }}"

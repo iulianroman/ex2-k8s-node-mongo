@@ -1,0 +1,9 @@
+- name: Enabling Bridge Firewall Rule
+  shell: "echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables"
+
+- name: Allow Network Ports in Firewalld
+  ufw:
+     port: "{{ item }}"
+     state: enabled
+     rule: allow
+  with_items: "{{ ports }}"

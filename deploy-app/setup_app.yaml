@@ -1,0 +1,19 @@
+- name: Create config map for MONGO variables
+  k8s:
+    state: present
+    src: {{ playbook_dir }}/deployments/ex2-config-map.yaml
+
+- name: Create mongodb deployment and service
+  k8s:
+    state: present
+    src: {{ playbook_dir }}/deployments/mongodb.yaml
+
+- name: Create application deployment and service
+  k8s:
+    state: present
+    src: {{ playbook_dir }}/deployments/ex2-app.yaml
+
+- name: Create ingress for the application
+  k8s:
+    state: present
+    src: {{ playbook_dir }}/deployments/ex2-app-ingress.yaml

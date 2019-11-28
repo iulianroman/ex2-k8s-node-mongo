@@ -1,0 +1,4 @@
+---
+- hosts: kubernetes-master-nodes
+  roles:
+    - k8s-master

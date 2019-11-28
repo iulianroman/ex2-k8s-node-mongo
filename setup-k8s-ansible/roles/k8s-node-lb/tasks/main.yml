@@ -1,0 +1,7 @@
+---
+# tasks file for k8s-node
+- include: install_packages.yaml
+- include: enable_services.yaml
+- include: configure_worker_node.yaml
+
+    

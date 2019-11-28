@@ -1,0 +1,6 @@
+[kubernetes-master-nodes]
+kubernetes-master ansible_host=10.10.10.10 ansible_python_interpreter=/usr/bin/python3
+
+[kubernetes-worker-nodes]
+kubernetes-lb ansible_host=10.10.10.12 ansible_python_interpreter=/usr/bin/python3
+kubernetes-worker ansible_host=10.10.10.11 ansible_python_interpreter=/usr/bin/python3

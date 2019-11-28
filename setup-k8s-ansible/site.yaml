@@ -1,0 +1,2 @@
+- import_playbook: setup_master_node.yaml
+- import_playbook: setup_worker_nodes.yaml

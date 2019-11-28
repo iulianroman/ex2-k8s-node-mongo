@@ -1,0 +1,25 @@
+---
+# defaults file for k8s-master
+#Enter the IP Address of the Kubernetes Master node to the ad_addr variable.
+ad_addr: 10.240.0.10
+pod_cidr: 192.168.0.0/16
+
+packages:
+- curl
+- apt-transport-https
+- docker.io
+
+k8spackages:
+- kubeadm
+- kubectl
+
+services:
+- docker
+- kubelet
+- ufw
+
+ports:
+- "6443/tcp"
+- "10250/tcp"
+
+token_file: join_token

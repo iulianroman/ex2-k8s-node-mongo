@@ -1,0 +1,7 @@
+---
+# tasks file for k8s-master
+- include: disable_swap.yaml
+- include: install_packages.yaml
+- include: enable_services.yaml
+#- include: enable_firewall_rules.yaml
+- include: configure_master_node.yaml

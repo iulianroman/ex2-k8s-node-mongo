@@ -1,0 +1,15 @@
+kubectl apply -f nginx-ingress/ns-and-sa.yaml
+kubectl apply -f nginx-ingress/default-server-secret.yaml
+kubectl apply -f nginx-ingress/nginx-config.yaml
+kubectl apply -f nginx-ingress/custom-resource-definitions.yaml
+kubectl apply -f nginx-ingress/rbac.yaml
+#One of the following 2 methods can be chosen to deploy the ingress controller (deployment or daemonset)
+#Deployment - when the number of ingress controller replicas need to be changed
+#daemonset - to run the controller on every node of subset of nodes
+#kubectl apply -f nginx-ingress/nginx-ingress.yaml
+kubectl apply -f nginx-ingress/ds-nginx-ingress.yaml
+#To Uninstall
+kubectl delete namespace nginx-ingres
+kubectl delete clusterrole nginx-ingress
+kubectl delete clusterrolebinding nginx-ingress
+
