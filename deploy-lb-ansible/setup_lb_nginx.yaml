@@ -3,6 +3,12 @@
   connection: local
   gather_facts: no
   tasks:
+    - name: Install additional python modules for k8s
+      pip:
+        name: "{{ item }}"
+        with_items:
+          - kubernetes
+          - openshift
     - name: Label the lb node with the role used in ds
       shell: |
         kubectl label node k8s-lb role=lb
