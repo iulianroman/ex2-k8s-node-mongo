@@ -1,33 +1,36 @@
-- name: Label the lb node with the role used in ds
-  shell:|
-    kubectl label node k8s-lb role=lb
+---
+- hosts: kubernetes-master-nodes
+- tasks:
+  - name: Label the lb node with the role used in ds
+    shell:|
+      kubectl label node k8s-lb role=lb
   
-- name: Create ns and service account
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/ns-and-sa.yaml
+  - name: Create ns and service account
+    k8s:
+      state: present
+      src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/ns-and-sa.yaml
 
-- name: Create secret
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/default-server-secret.yaml
+  - name: Create secret
+    k8s:
+      state: present
+      src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/default-server-secret.yaml
 
-- name: Create nginx config
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/nginx-config.yaml
+  - name: Create nginx config
+    k8s:
+      state: present
+      src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/nginx-config.yaml
 
-- name: Create custom resource definition
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/custom-resource-definitions.yaml
+  - name: Create custom resource definition
+    k8s:
+      state: present
+      src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/custom-resource-definitions.yaml
 
-- name: Create RBAC
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/rbac.yaml
+  - name: Create RBAC
+    k8s:
+      state: present
+      src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/rbac.yaml
 
-- name: Deploy the nginx ingress controller
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/ds-nginx-ingress.yaml
+  - name: Deploy the nginx ingress controller
+    k8s:
+      state: present
+      src: {{ playbook_dir }}/nginx-ingress/nginx-ingress/ds-nginx-ingress.yaml
