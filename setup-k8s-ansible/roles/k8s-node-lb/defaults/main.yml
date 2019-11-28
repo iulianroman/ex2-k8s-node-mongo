@@ -1,7 +1,7 @@
 ---
 # defaults file for k8s-node
 #Enter the IP Address of the Kubernetes Master node to the ad_addr variable.
-ad_addr: 10.10.10.10
+ad_addr: 10.240.0.10
 cidr_v: 172.16.0.0/16
 
 packages:

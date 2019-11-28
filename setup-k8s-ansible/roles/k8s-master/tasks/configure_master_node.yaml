@@ -23,3 +23,7 @@
 
 - name: Install Network Add-on
   command: kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
+
+- name: Pause for 2 minutes
+  pause:
+    minutes: 2
