@@ -1,6 +1,6 @@
 ---
 - hosts: kubernetes-master-nodes
-- tasks:
+  tasks:
   - name: Label the lb node with the role used in ds
     shell:|
       kubectl label node k8s-lb role=lb
