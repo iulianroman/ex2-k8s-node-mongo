@@ -1,0 +1,5 @@
+---
+- hosts: kubernetes-worker
+  roles:
+    - k8s-node
+    

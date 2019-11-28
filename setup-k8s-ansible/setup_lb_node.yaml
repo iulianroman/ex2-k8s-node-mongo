@@ -1,0 +1,4 @@
+---
+- hosts: kubernetes-lb
+  roles:
+    - k8s-node-lb
