@@ -1,6 +1,5 @@
 ---
-- hosts: 127.0.0.1
-  connection: local
+- hosts: kubernetes-master
   gather_facts: no
   tasks:
     - name: Install additional python modules for k8s
