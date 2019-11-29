@@ -19,7 +19,7 @@
 
     - name: Check if HPA is already defined
       shell: |
-        kubectl get hpa ex2-app
+        kubectl get hpa
       register: k8s_hpa
 
 
