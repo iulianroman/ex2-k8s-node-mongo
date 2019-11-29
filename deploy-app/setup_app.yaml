@@ -17,16 +17,30 @@
         state: present
         src: "{{ playbook_dir }}/deployments/ex2-app.yaml"
 
-    - name: Check if HPA is already defined
-      shell: |
-        kubectl get hpa
-      register: k8s_hpa
+    #- name: Check if HPA is already defined
+    #  shell: |
+    #    kubectl get hpa
+    #  register: k8s_hpa
 
 
-    - name: Configure HPA for the app deployment
-      shell: |
-        kubectl autoscale deployment ex2-app --cpu-percent=50 --min=2 --max=10
-      when: k8s_hpa.stdout.find("ex2-app") == -1
+    #- name: Configure HPA for the app deployment
+    #  shell: |
+    #    kubectl autoscale deployment ex2-app --cpu-percent=50 --min=2 --max=10
+    #  when: k8s_hpa.stdout.find("ex2-app") == -1
+    - name: Create RBAC for metrics server
+      k8s:
+        state: present
+        src: "{{ playbook_dir }}/deployments/metrics/metrics-rbac.yaml"
+
+    - name: Deploy the metrics server
+      k8s:
+        state: present
+        src: "{{ playbook_dir }}/deployments/metrics/metrics-server-deployment.yaml"
+    
+    - name: Create HPA configuration for ex2-app deployment
+      k8s:
+        state: present
+        src: "{{ playbook_dir }}/deployments/metrics/hpa.yaml"
 
     - name: Create ingress for the application
       k8s:
