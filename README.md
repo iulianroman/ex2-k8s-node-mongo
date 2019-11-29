@@ -29,5 +29,8 @@ If you would like to run the application:
 ## To deploy the application with mongodb
 - Run: `cd deploy-app
         ansible-playbook -i hosts setup_app.yaml`
-## After all steps have been completed, you can check you application 
-- With curl :
+
+## After all steps have been completed, you can check if the deployment was successfull: 
+- Add an entry for the PUBLIC_IP of the load balancer in DNS or local hosts file
+- Ex. with curl : `curl -H "curl -H "Host: ex2-app.example.com" http://ex2-app.example.com:8080`
+- Ex. With Chrome/Mozilla: enter the following URL `http://ex2-app.example.com:8080`
