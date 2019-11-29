@@ -1,19 +1,27 @@
-- name: Create config map for MONGO variables
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/deployments/ex2-config-map.yaml
+---
+- hosts: kubernetes-master
+  gather_facts: no
+  tasks:
+  - name: Create config map for MONGO variables
+    k8s:
+      state: present
+      src: deployments/ex2-config-map.yaml
 
-- name: Create mongodb deployment and service
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/deployments/mongodb.yaml
+  - name: Create mongodb deployment and service
+    k8s:
+      state: present
+      src: deployments/mongodb.yaml
 
-- name: Create application deployment and service
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/deployments/ex2-app.yaml
+  - name: Create application deployment and service
+    k8s:
+      state: present
+      src: deployments/ex2-app.yaml
 
-- name: Create ingress for the application
-  k8s:
-    state: present
-    src: {{ playbook_dir }}/deployments/ex2-app-ingress.yaml
+  - name: Configure HPA for the app deployment
+    shell: |
+      kubectl autoscale deployment ex2-app --cpu-percent=50 --min=2 --max=10
+
+  - name: Create ingress for the application
+    k8s:
+      state: present
+      src: deployments/ex2-app-ingress.yaml

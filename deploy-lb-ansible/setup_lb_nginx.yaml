@@ -8,9 +8,16 @@
         with_items:
           - kubernetes
           - openshift
-    - name: Label the lb node with the role used in ds
+    - name: Check if the node is already labeled
+      shell: |
+        kubectl get nodes k8s-lb --show-labels
+      register: k8s_node_label
+
+    - name: Label the lb node with the role used in ds 
       shell: |
         kubectl label node k8s-lb role=lb
+      when: k8s_node_label.stdout.find("role=lb") == -1
+      
       ignore_errors: True
   
     - name: Create ns and service account
