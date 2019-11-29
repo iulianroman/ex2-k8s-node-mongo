@@ -19,14 +19,14 @@
 
     - name: Check if HPA is already defined
       shell: |
-        kubectl autoscale deployment ex2-app --cpu-percent=50 --min=2 --max=10
+        kubectl get hpa ex2-app
       register: k8s_hpa
 
 
     - name: Configure HPA for the app deployment
       shell: |
         kubectl autoscale deployment ex2-app --cpu-percent=50 --min=2 --max=10
-      when: k8s_hpa.stdout.find("role=lb") == -1
+      when: k8s_hpa.stdout.find("ex2-app") == -1
 
     - name: Create ingress for the application
       k8s:
