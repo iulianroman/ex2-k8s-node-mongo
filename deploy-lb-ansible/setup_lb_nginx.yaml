@@ -28,29 +28,29 @@
     - name: Create ns and service account
       k8s:
         state: present
-        src: nginx-ingress/ns-and-sa.yaml
+        src: {{ playbook_dir }}/nginx-ingress/ns-and-sa.yaml
 
     - name: Create secret
       k8s:
         state: present
-        src: nginx-ingress/default-server-secret.yaml
+        src: {{ playbook_dir }}/nginx-ingress/default-server-secret.yaml
 
     - name: Create nginx config
       k8s:
         state: present
-        src: nginx-ingress/nginx-config.yaml
+        src: {{ playbook_dir }}/nginx-ingress/nginx-config.yaml
 
     - name: Create custom resource definition
       k8s:
         state: present
-        src: nginx-ingress/custom-resource-definitions.yaml
+        src: {{ playbook_dir }}/nginx-ingress/custom-resource-definitions.yaml
 
     - name: Create RBAC
       k8s:
         state: present
-        src: nginx-ingress/rbac.yaml
+        src: {{ playbook_dir}}/nginx-ingress/rbac.yaml
 
     - name: Deploy the nginx ingress controller
       k8s:
         state: present
-        src: nginx-ingress/ds-nginx-ingress.yaml
+        src: {{ playbook_dir}}/nginx-ingress/ds-nginx-ingress.yaml
