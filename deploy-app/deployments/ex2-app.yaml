@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ex2-app
+  namespace: default
   labels:
     app: ex2-app
 spec:
@@ -39,6 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: default
   name: ex2-app-service
 spec:
   ports:

@@ -17,9 +17,16 @@
         state: present
         src: "{{ playbook_dir }}/deployments/ex2-app.yaml"
 
+    - name: Check if HPA is already defined
+      shell: |
+        kubectl autoscale deployment ex2-app --cpu-percent=50 --min=2 --max=10
+      register: k8s_hpa
+
+
     - name: Configure HPA for the app deployment
       shell: |
         kubectl autoscale deployment ex2-app --cpu-percent=50 --min=2 --max=10
+      when: k8s_hpa.stdout.find("role=lb") == -1
 
     - name: Create ingress for the application
       k8s:
