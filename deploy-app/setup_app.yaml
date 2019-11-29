@@ -5,17 +5,17 @@
   - name: Create config map for MONGO variables
     k8s:
       state: present
-      src: deployments/ex2-config-map.yaml
+      src: "{{ playbook_dir }}/deployments/ex2-config-map.yaml"
 
   - name: Create mongodb deployment and service
     k8s:
       state: present
-      src: deployments/mongodb.yaml
+      src: "{{ playbook_dir }}/deployments/mongodb.yaml"
 
   - name: Create application deployment and service
     k8s:
       state: present
-      src: deployments/ex2-app.yaml
+      src: "{{ playbook_dir }}/deployments/ex2-app.yaml"
 
   - name: Configure HPA for the app deployment
     shell: |
@@ -24,4 +24,4 @@
   - name: Create ingress for the application
     k8s:
       state: present
-      src: deployments/ex2-app-ingress.yaml
+      src: "{{ playbook_dir }}/deployments/ex2-app-ingress.yaml"
